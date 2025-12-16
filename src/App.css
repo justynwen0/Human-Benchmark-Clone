@@ -1,0 +1,144 @@
+/* src/App.css */
+
+/* 1. RESET GLOBAL & BACKGROUND */
+body {
+  margin: 0 !important; /* KRUSIAL: Memastikan margin browser terhapus */
+  padding: 0 !important; /* KRUSIAL: Memastikan padding browser terhapus */
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+.App {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* 2. HEADER */
+.app-header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.header-content-wrapper {
+  max-width: 1000px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* Memisahkan Kiri dan Kanan */
+  align-items: center;
+}
+
+/* KELOMPOK NAVIGASI KIRI */
+.header-left-nav {
+  display: flex; /* Untuk menyusun Logo dan Dashboard */
+  align-items: center;
+  gap: 30px; /* JARAK ANTARA LOGO DAN DASHBOARD */
+}
+
+/* KELOMPOK NAVIGASI KANAN */
+.header-right-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* JARAK ANTARA SIGN UP DAN LOGIN */
+}
+
+.app-header .logo {
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000;
+}
+
+.app-header a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9em; /* Sedikit dikecilkan */
+  text-transform: uppercase;
+}
+
+/* Styling untuk Footer */
+.app-footer {
+  padding: 30px 0;
+  text-align: right; /* KUNCI: Membuat teks rata kanan */
+  color: #777; /* Warna teks biasa (Copyright) */
+  font-size: 0.8em;
+  max-width: 1000px; /* Batasi lebar footer agar sejajar dengan konten atas */
+  margin: 0 auto; /* Tengah-kan footer (walaupun teksnya rata kanan di dalamnya) */
+  margin-left: 8.8rem;
+}
+
+/* Styling untuk Link di dalam Footer */
+.app-footer a {
+  color: #42a5f5; /* KUNCI: Ubah warna link menjadi biru (seperti warna biru utama) */
+  text-decoration: none; /* Opsional: Hilangkan garis bawah */
+  margin-left: 10px; /* Beri jarak antar link */
+  font-size: 1em; /* Ukuran font dipertahankan */
+  display: block;
+  margin-top: 0.01rem;
+}
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+/* 3. AREA MAIN GAME (BIRU - HARUS FULL 100% WIDTH) */
+.game-area-running {
+  width: 100%; /* MEMAKSA FULL WIDTH HORIZONTAL */
+  min-height: 80vh;
+  background-color: #42a5f5;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  margin: 0; /* Hapus margin yang mungkin menggeser */
+  /* Pastikan tidak ada max-width di sini! */
+}
+
+/* 4. CONTAINER DUA KARTU (DI BAWAH) */
+.game-intro-screen {
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  max-width: 1000px; /* Konten Kartu tetap dibatasi dan terpusat */
+  width: 95%;
+  margin: 0 auto; /* PUSATKAN KONTEN KARTU */
+  box-sizing: border-box;
+}
+
+/* 5. STYLING KARTU */
+.intro-card-left,
+.intro-card-right {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Gunakan flex: 1 dan max-width agar kartu berbagi ruang secara adil */
+  flex: 1;
+  max-width: 450px;
+  box-sizing: border-box;
+}
+/* Tambahkan style untuk judul kartu */
+.intro-card-left h3,
+.intro-card-right h3 {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  color: #535458;
+  font-weight: 500;
+  font-size: 1.7rem;
+}
+
+/* 6. STATISTIK DI DALAM GAME (Running/Game Over) - Sudah benar */
+.stats-panel-in-game {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  max-width: 700px;
+  color: white;
+  z-index: 5;
+  font-size: 1.1em;
+}
