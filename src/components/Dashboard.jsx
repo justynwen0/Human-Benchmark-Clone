@@ -1,6 +1,6 @@
 // src/components/Dashboard.jsx
 
-import React from "react";
+import React, { useMemo } from "react"; // <--- TAMBAH useMemo
 
 // --- KONSTANTA LOGO & WARNA ---
 const THUNDERBOLT_SVG_PATH =
@@ -46,8 +46,41 @@ const VisualMemoryIcon = ({ size = "30px", color = BLUE_COLOR }) => (
   </div>
 );
 
-const Dashboard = ({ setCurrentGame }) => {
-  // Game Card Component
+// <--- PERUBAHAN DI SINI: Dashboard menerima props bahasa
+const Dashboard = ({ setCurrentGame, currentLang, toggleLang }) => {
+  // 1. KAMUS TERJEMAHAN (DICTIONARY)
+  const translations = useMemo(
+    () => ({
+      EN: {
+        heroTitle: "Human Benchmark",
+        heroTagline:
+          "Measure your abilities with brain games and cognitive tests.",
+        buttonStart: "Get Started",
+        aimTitle: "Aim Trainer",
+        aimDesc: "How quickly can you hit all the targets?",
+        visualTitle: "Visual Memory",
+        visualDesc: "Remember an increasingly large board of squares.",
+        footerCopyright: "Copyright 2007-2025 Human Benchmark",
+      },
+      ID: {
+        heroTitle: "Patokan Manusia",
+        heroTagline:
+          "Ukur kemampuan Anda dengan permainan otak dan tes kognitif.",
+        buttonStart: "Mulai",
+        aimTitle: "Pelatih Bidikan",
+        aimDesc: "Seberapa cepat Anda bisa mengenai semua target?",
+        visualTitle: "Memori Visual",
+        visualDesc: "Ingat papan persegi yang ukurannya terus bertambah.",
+        footerCopyright: "Hak Cipta 2007-2025 Patokan Manusia",
+      },
+    }),
+    []
+  );
+
+  // Pilih teks sesuai bahasa saat ini
+  const T = translations[currentLang];
+
+  // Game Card Component (Tetap Sama, hanya menerima props yang sudah diterjemahkan)
   const GameCard = ({
     title,
     description,
@@ -110,10 +143,10 @@ const Dashboard = ({ setCurrentGame }) => {
           <path d={THUNDERBOLT_SVG_PATH}></path>
         </svg>
         <h1 style={{ fontSize: "3em", margin: "15px 0 5px 0" }}>
-          Human Benchmark
+          {T.heroTitle} {/* <--- GUNAKAN TERJEMAHAN */}
         </h1>
         <p style={{ fontSize: "1.2em", margin: "0 0 30px 0" }}>
-          Measure your abilities with brain games and cognitive tests.
+          {T.heroTagline} {/* <--- GUNAKAN TERJEMAHAN */}
         </p>
         <button
           style={{
@@ -129,7 +162,7 @@ const Dashboard = ({ setCurrentGame }) => {
           }}
           onClick={() => setCurrentGame("AimTrainer")}
         >
-          Get Started
+          {T.buttonStart} {/* <--- GUNAKAN TERJEMAHAN */}
         </button>
       </div>
 
@@ -148,15 +181,15 @@ const Dashboard = ({ setCurrentGame }) => {
         }}
       >
         <GameCard
-          title="Aim Trainer"
-          description="How quickly can you hit all the targets?"
+          title={T.aimTitle} // <--- GUNAKAN TERJEMAHAN
+          description={T.aimDesc} // <--- GUNAKAN TERJEMAHAN
           icon={<AimTrainerIcon size="50px" color="#42a5f5" />}
           gameKey="AimTrainer"
           iconColor="#42a5f5"
         />
         <GameCard
-          title="Visual Memory"
-          description="Remember an increasingly large board of squares."
+          title={T.visualTitle} // <--- GUNAKAN TERJEMAHAN
+          description={T.visualDesc} // <--- GUNAKAN TERJEMAHAN
           icon={<VisualMemoryIcon size="50px" color="#42a5f5" />}
           gameKey="VisualMemory"
           iconColor="#42a5f5"
@@ -177,7 +210,7 @@ const Dashboard = ({ setCurrentGame }) => {
       >
         {/* Copyright di baris pertama */}
         <p style={{ margin: "0 0 15px 0" }}>
-          Copyright 2007-2025 Human Benchmark
+          {T.footerCopyright} {/* <--- GUNAKAN TERJEMAHAN */}
         </p>
 
         {/* Links biru di baris berikutnya */}

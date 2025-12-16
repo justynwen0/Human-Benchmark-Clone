@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import AimTrainerGame from "./components/AimTrainerGame";
 import VisualMemoryGame from "./components/VisualMemoryGame";
-import Dashboard from "./components/Dashboard"; // Pastikan Anda sudah membuat Dashboard.jsx
+import Dashboard from "./components/Dashboard"; // Dashboard.jsx
+import LanguageToggle from "./components/LanguageToggle"; // LanguageToggle.jsx <-- SUDAH ADA
 import "./App.css";
 
 // --- KONSTANTA LOGO (PETIR SVG) ---
@@ -26,22 +27,37 @@ const HeaderThunderboltIcon = () => (
 
 function App() {
   // State untuk menentukan komponen mana yang akan ditampilkan
-  // Nilai: 'Dashboard', 'AimTrainer', 'VisualMemory'
   const [currentGame, setCurrentGame] = useState("Dashboard");
+
+  // === START: KODE BARU UNTUK TRANSLATE ===
+
+  // 1. STATE UNTUK BAHASA (Default: English 'EN')
+  const [language, setLanguage] = useState("EN");
+
+  // Fungsi untuk mengubah EN <-> ID
+  const toggleLanguage = () => {
+    setLanguage((prevLang) => (prevLang === "EN" ? "ID" : "EN"));
+  };
+
+  // === END: KODE BARU UNTUK TRANSLATE ===
 
   // Fungsi untuk memilih dan merender komponen Game yang sesuai
   const renderGame = () => {
     switch (currentGame) {
       case "AimTrainer":
-        // Catatan: Jika Anda ingin bisa kembali ke Dashboard dari dalam game,
-        // Anda harus mengirimkan setCurrentGame sebagai prop ke AimTrainerGame
         return <AimTrainerGame />;
       case "VisualMemory":
         return <VisualMemoryGame />;
       case "Dashboard":
       default:
-        // Mengirimkan setCurrentGame agar Dashboard bisa memicu perpindahan game
-        return <Dashboard setCurrentGame={setCurrentGame} />;
+        // Mengirimkan setCurrentGame dan State Bahasa ke Dashboard
+        return (
+          <Dashboard
+            setCurrentGame={setCurrentGame}
+            currentLang={language} // <--- PROP BAHASA
+            toggleLang={toggleLanguage} // <--- PROP FUNGSI UBAH BAHASA
+          />
+        );
     }
   };
 
@@ -80,6 +96,11 @@ function App() {
             <a href="#" className="nav-item">
               LOGIN
             </a>
+            {/* 2. TAMBAHKAN TOMBOL BAHASA DI SINI */}
+            <LanguageToggle
+              currentLang={language}
+              toggleLang={toggleLanguage}
+            />
           </div>
         </div>
       </header>
